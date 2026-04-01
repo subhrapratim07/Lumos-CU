@@ -19,7 +19,7 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      const res = await axios.post("lumos-backend-production.up.railway.app/api/users/login", {
+      const res = await axios.post("https://lumos-cu.onrender.com/api/users/login", {
         name,
         phone,
       });
