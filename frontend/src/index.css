@@ -1,0 +1,1148 @@
+/* =============================================
+   HOGWARTS PORTAL — Complete Stylesheet
+   Fonts: Cinzel (headings) + IM Fell English (body)
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+  --gold:        #c9a84c;
+  --gold-light:  #f0d080;
+  --gold-dark:   #8a6820;
+  --crimson:     #6b1a1a;
+  --deep-navy:   #080612;
+  --parchment:   #f2e8c6;
+  --parchment-2: #e8d9a8;
+  --parchment-3: #d4b97a;
+  --ink:         #2c1a0e;
+  --ink-light:   #4a3020;
+  --seal-red:    #8b1a1a;
+
+  --shadow-gold: 0 0 20px rgba(201, 168, 76, 0.4);
+  --shadow-deep: 0 8px 40px rgba(0,0,0,0.7);
+  --border-gold: 1px solid rgba(201, 168, 76, 0.5);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--deep-navy);
+  color: var(--gold);
+  font-family: 'IM Fell English', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Page Shell ── */
+.page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  padding: 20px;
+}
+
+/* ════════════════════════════════
+   LANDING PAGE
+   ════════════════════════════════ */
+.landing-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.landing-content.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Crest */
+.crest-wrapper {
+  animation: floatCrest 4s ease-in-out infinite;
+}
+
+.crest-svg {
+  width: 160px;
+  height: 175px;
+  drop-shadow: 0 0 30px rgba(201, 168, 76, 0.5);
+  filter: drop-shadow(0 0 14px rgba(201, 168, 76, 0.45));
+}
+
+@keyframes floatCrest {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Title block */
+.landing-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  opacity: 0.85;
+}
+
+.landing-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  gap: 6px;
+}
+
+.word-hogwarts {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(38px, 8vw, 64px);
+  font-weight: 700;
+  color: var(--gold-light);
+  text-shadow:
+    0 0 20px rgba(240, 208, 128, 0.5),
+    0 0 60px rgba(201, 168, 76, 0.3),
+    0 2px 4px rgba(0,0,0,0.8);
+  letter-spacing: 4px;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.word-portal {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px, 3vw, 20px);
+  font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+@keyframes shimmer {
+  0%, 100% { text-shadow: 0 0 20px rgba(240,208,128,0.4), 0 2px 4px rgba(0,0,0,0.8); }
+  50%       { text-shadow: 0 0 40px rgba(240,208,128,0.8), 0 0 80px rgba(201,168,76,0.4), 0 2px 4px rgba(0,0,0,0.8); }
+}
+
+/* Ornament */
+.title-ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 240px;
+}
+
+.title-ornament.small { width: 160px; }
+
+.ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+}
+
+.ornament-diamond {
+  font-size: 8px;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* Subtitle */
+.landing-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: rgba(201, 168, 76, 0.65);
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+/* Portal Button */
+.btn-portal {
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  
+}
+
+.btn-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 0;
+  filter: blur(8px);
+}
+
+.btn-portal:hover .btn-glow { opacity: 0.6; }
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 14px 38px;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.18));
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(4px);
+}
+
+.btn-portal:hover .btn-text {
+  background: linear-gradient(135deg, rgba(201,168,76,0.25), rgba(201,168,76,0.35));
+  box-shadow: 0 0 30px rgba(201,168,76,0.3), inset 0 0 20px rgba(201,168,76,0.05);
+  color: #fff8e1;
+}
+
+.btn-portal:active .btn-text {
+  transform: scale(0.97);
+}
+
+/* Footer tag */
+.landing-footer {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: rgba(201, 168, 76, 0.35);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════
+   LOGIN PAGE
+   ════════════════════════════════ */
+.login-page {
+  padding: 40px 20px;
+}
+
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: min(480px, 95vw);
+  background:
+    linear-gradient(160deg, rgba(20,12,4,0.97), rgba(10,6,2,0.98));
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 4px;
+  padding: 60px 48px 44px;
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.08),
+    0 20px 80px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(201,168,76,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  backdrop-filter: blur(12px);
+  animation: cardIn 0.8s ease both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Corner decorations */
+.login-card::before,
+.login-card::after {
+  content: '✦';
+  position: absolute;
+  color: var(--gold-dark);
+  font-size: 12px;
+  opacity: 0.5;
+}
+.login-card::before { top: 14px; left: 16px; }
+.login-card::after  { top: 14px; right: 16px; }
+
+/* Wax seal */
+.wax-seal {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #c0392b, #7b0d0d);
+  border: 2px solid rgba(180, 80, 60, 0.6);
+  box-shadow:
+    0 4px 20px rgba(180, 20, 20, 0.5),
+    inset 0 2px 4px rgba(255,150,120,0.2),
+    inset 0 -2px 6px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sealPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes sealPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(180,20,20,0.5), inset 0 2px 4px rgba(255,150,120,0.2); }
+  50%       { box-shadow: 0 4px 30px rgba(180,20,20,0.8), inset 0 2px 4px rgba(255,150,120,0.3); }
+}
+
+.seal-letter {
+  font-family: 'Cinzel Decorative', serif;
+  color: rgba(255, 220, 200, 0.9);
+  font-size: 22px;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Login header */
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.login-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--seal-red);
+  opacity: 0.9;
+}
+
+.login-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(18px, 4vw, 26px);
+  font-weight: 700;
+  color: var(--gold-light);
+  text-shadow: 0 0 20px rgba(201,168,76,0.3);
+}
+
+.login-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(201,168,76,0.5);
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+/* Fields */
+.login-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  padding-left: 4px;
+}
+
+.field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.magic-input {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 2px;
+  color: var(--parchment);
+  font-family: 'IM Fell English', serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.magic-input::placeholder {
+  color: rgba(201, 168, 76, 0.2);
+  font-style: italic;
+}
+
+.magic-input:focus {
+  border-color: rgba(201, 168, 76, 0.6);
+  background: rgba(201, 168, 76, 0.04);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.1), inset 0 0 10px rgba(201,168,76,0.03);
+}
+
+/* Error */
+.login-error {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  color: #e05050;
+  font-size: 13px;
+  text-align: center;
+  padding: 8px 16px;
+  border: 1px solid rgba(220,60,60,0.2);
+  border-radius: 2px;
+  background: rgba(200,30,30,0.06);
+  width: 100%;
+}
+
+.login-btn { width: 100%; }
+.login-btn .btn-text { width: 100%; text-align: center; }
+
+.login-disclaimer {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(201,168,76,0.25);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════
+   INVITATION PAGE — ENVELOPE
+   ════════════════════════════════ */
+.invitation-page {
+  gap: 24px;
+}
+
+@font-face {
+  font-family: "HarryPotter";
+  src: url("/fonts/HarryPotter.TTF") format("truetype");
+}
+.word-hogwarts {
+  font-family: "HarryPotter", serif !important;
+
+  font-size: clamp(55px, 10vw, 100px);
+  letter-spacing: 3px;
+
+  color: #f0d080;
+
+  text-shadow:
+    0 0 20px rgba(240,208,128,0.6),
+    0 0 60px rgba(201,168,76,0.5),
+    0 0 120px rgba(201,168,76,0.3),
+    0 2px 6px rgba(0,0,0,1);
+
+  animation: lumosGlow 3s ease-in-out infinite;
+}
+/* ✨ TEXT ENHANCEMENT (COMPACT) */
+/* 🔮 Harry Potter Font */
+@font-face {
+  font-family: "HarryPotter";
+  src: url("/fonts/HarryPotter.TTF") format("truetype");
+}
+
+.letter-batch {
+  font-family: "HarryPotter", serif;
+
+  font-size: 3.5rem;
+  letter-spacing: 3px;
+  text-align: center;
+
+  /* 🎨 Gradient */
+  background: linear-gradient(180deg, #e2ba26, #e06c1f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 🔥 Text Border */
+  
+}
+.poster-header h2{
+  font-size:22px; letter-spacing:3px; color:#f5d37a;
+  text-shadow:0 0 10px rgba(0,0,0,.8),0 0 20px rgba(255,215,120,.3);
+}
+.poster-header p{
+  font-size:15px; color:rgba(255,230,180,.85);
+  text-shadow:0 0 8px rgba(0,0,0,.7);
+}
+.poster-present{
+  font-size:13px; letter-spacing:2px; color:rgba(255,215,120,.6);
+}
+
+.poster-title h3{
+  font-size:20px; letter-spacing:4px; color:#f0d080;
+  text-shadow:0 0 10px rgba(0,0,0,.8),0 0 20px rgba(255,215,120,.4);
+}
+
+/* 🔥 LUMOS */
+.poster-lumos{
+  font-family:"HarryPotter",serif;
+  font-size:90px; letter-spacing:4px;
+  background:linear-gradient(#f8e6a0,#c9a84c);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:
+    0 0 25px rgba(255,215,120,.9),
+    0 0 60px rgba(201,168,76,.7),
+    0 0 120px rgba(201,168,76,.4),
+    0 4px 10px rgba(0,0,0,1);
+  animation:lumosGlow 3s ease-in-out infinite;
+}
+
+.poster-user,
+.poster-details{
+  font-size:17px; color:#f5e6b0;
+  text-shadow:0 0 10px rgba(0,0,0,.8);
+}
+
+.poster-house{
+  font-size:24px; font-weight:bold;
+  text-shadow:0 0 10px currentColor,0 0 20px rgba(0,0,0,.8);
+}
+
+.poster-ticket h3{
+  font-size:18px; letter-spacing:1px;
+}
+
+/* ✨ Glow Animation */
+@keyframes lumosGlow{
+  0%,100%{
+    text-shadow:0 0 25px rgba(255,215,120,.6),0 0 60px rgba(201,168,76,.5);
+  }
+  50%{
+    text-shadow:
+      0 0 40px rgba(255,230,150,1),
+      0 0 100px rgba(255,200,100,.8),
+      0 0 160px rgba(255,180,80,.6);
+  }
+}
+.crest-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.word-hogwarts {
+  font-size: 4.5rem; /* increase size */
+  font-weight: 700;
+  letter-spacing: 3px;
+
+  color: #f5d37a;
+
+  text-shadow:
+    0 0 10px rgba(255, 215, 120, 0.9),
+    0 0 25px rgba(255, 200, 80, 0.8),
+    0 0 60px rgba(255, 180, 50, 0.6);
+}
+.word-portal {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: #e6c76a;
+
+  text-shadow: 0 0 8px rgba(255, 215, 120, 0.6);
+}
+.landing-sub {
+  color: #f8e6a0;
+  font-size: 1rem;
+  opacity: 0.95;
+
+  text-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
+.landing-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(circle, rgba(0,0,0,0.4), rgba(0,0,0,0.85));
+  z-index: 0;
+}
+.landing-eyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  color: #f5d37a;
+
+  /* 🔥 glow + visibility */
+  text-shadow:
+    0 0 6px rgba(255, 215, 120, 0.8),
+    0 0 12px rgba(255, 200, 80, 0.6);
+
+  opacity: 1;
+  margin-bottom: 10px;
+}
+.landing-footer {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+
+  color: #e6c76a;
+
+  /* 🔥 glow effect */
+  text-shadow:
+    0 0 5px rgba(255, 215, 120, 0.7),
+    0 0 10px rgba(255, 200, 80, 0.5);
+
+  opacity: 0.95;
+}
+.landing-content {
+  position: relative;
+  z-index: 1;
+}
+.crest-image {
+  width: 150px;          /* 🔥 increased size */
+  max-width: 80vw;       /* responsive */
+  height: auto;
+  object-fit: contain;   /* ✅ prevents cropping */
+
+  filter: drop-shadow(0 0 18px rgba(255, 215, 120, 0.8));
+  animation: floatLogo 4s ease-in-out infinite;
+}
+
+.invitation-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.5);
+  position:relative;
+  z-index: 2;
+ 
+  animation: fadeInDown 1s ease both;
+}
+.invitation-envelope-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+
+  gap: 40px; /* space between text and envelope */
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Envelope scene */
+.envelope-scene {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  cursor: pointer;
+  animation: fadeInUp 1s ease 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 3D Envelope */
+.envelope-3d {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  transform-style: preserve-3d;
+  animation: envelopeFloat 3s ease-in-out infinite;
+  transition: transform 0.3s;
+}
+
+.envelope-3d:hover { transform: scale(1.04) rotate(-1deg); }
+
+.envelope-3d.opening {
+  animation: envelopeShake 0.3s ease, envelopeFloat 3s ease-in-out 0.3s infinite;
+}
+
+@keyframes envelopeFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-10px) rotate(0.5deg); }
+}
+
+@keyframes envelopeShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+/* Envelope back */
+.env-back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1a0e06, #2d1c08);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 2px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(201,168,76,0.1),
+    inset 0 1px 0 rgba(201,168,76,0.15);
+}
+
+/* Flaps */
+.env-flap {
+  position: absolute;
+  background: linear-gradient(145deg, #241508, #1a0e06);
+  border: 1px solid rgba(201,168,76,0.25);
+}
+
+.env-flap-left {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 90px 0 90px 140px;
+  border-color: transparent transparent transparent #1d1005;
+  background: none;
+  border: none;
+  left: 0;
+  top: 0;
+}
+
+.env-flap-right {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 90px 140px 90px 0;
+  border-color: transparent #1d1005 transparent transparent;
+  background: none;
+  border: none;
+  right: 0;
+  top: 0;
+}
+
+.env-flap-bottom {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 140px 90px 140px;
+  border-color: transparent transparent #221205 transparent;
+  background: none;
+  border: none;
+  bottom: 0;
+  left: 0;
+}
+
+/* Top flap — animated */
+.env-flap-top {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 90px 140px 0 140px;
+  border-color: #2a1608 transparent transparent transparent;
+  background: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  top: 0;
+  left: 0;
+  transform-origin: top center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+}
+
+.envelope-3d.opening .env-flap-top {
+  transform: rotateX(-180deg);
+}
+
+/* Letter peeking */
+.env-letter-peek {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  z-index: 2;
+  font-size: 28px;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.8s ease;
+}
+
+.env-letter-peek.peek {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-30px);
+}
+
+/* Wax seal on envelope */
+.env-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #c0392b, #6b0d0d);
+  border: 1.5px solid rgba(200, 80, 60, 0.5);
+  box-shadow: 0 4px 16px rgba(150, 20, 20, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.env-seal.seal-break {
+  transform: translate(-50%, -50%) scale(0) rotate(45deg);
+  opacity: 0;
+}
+
+.env-seal span {
+  font-family: 'Cinzel Decorative', serif;
+  color: rgba(255,220,200,0.9);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Hint text */
+.env-hint {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(201,168,76,0.5);
+  text-transform: uppercase;
+  transition: opacity 0.5s;
+}
+
+.env-hint.hint-fade { opacity: 0.3; }
+
+/* Sparkles */
+.sparkle-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  color: var(--gold-light);
+  font-size: 16px;
+  animation: sparkleFly 1.2s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.05s);
+  transform-origin: center;
+}
+
+@keyframes sparkleFly {
+  0%   { opacity: 1; transform: translate(0,0) scale(1) rotate(0deg); }
+  100% { 
+    opacity: 0; 
+    transform: 
+      translate(
+        calc(cos(calc(var(--i) * 45deg)) * 80px),
+        calc(sin(calc(var(--i) * 45deg)) * 80px)
+      ) scale(0) rotate(180deg); 
+  }
+}
+
+/* ════════════════════════════════
+   LETTER / SCROLL
+   ════════════════════════════════ */
+.invitation-letter-wrap {
+  width: min(560px, 95vw);
+  z-index: 2;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.letter-scene {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: scale(0.92) translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.letter-scene.letter-in {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Scroll caps */
+.scroll-cap {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.scroll-roll {
+  width: min(500px, 90vw);
+  height: 20px;
+  background: linear-gradient(to bottom, #c9a84c, #8a6820, #c9a84c);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,230,140,0.4);
+}
+
+.scroll-cap-top { margin-bottom: -8px; }
+.scroll-cap-bottom { margin-top: -8px; }
+
+/* Parchment */
+.parchment-body {
+  background:
+    linear-gradient(160deg, var(--parchment) 0%, var(--parchment-2) 50%, #dcc888 100%);
+  padding: 44px 48px;
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 60px rgba(0,0,0,0.7);
+}
+
+/* Parchment texture overlay */
+.parchment-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(139, 104, 32, 0.07) 24px,
+      rgba(139, 104, 32, 0.07) 25px
+    );
+  pointer-events: none;
+}
+
+/* Aged edges */
+.parchment-body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(100,60,10,0.25) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 0%, rgba(100,60,10,0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 0% 100%, rgba(100,60,10,0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 100%, rgba(100,60,10,0.25) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Letter header */
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-crest-small {
+  font-size: 36px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.letter-school-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 13px;
+  color: var(--ink);
+  letter-spacing: 2px;
+}
+
+.letter-school-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-light);
+  opacity: 0.7;
+}
+
+/* Divider */
+.letter-divider {
+  text-align: center;
+  color: var(--gold-dark);
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin: 4px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Date */
+.letter-date {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-light);
+  text-align: right;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8px;
+}
+
+/* Salutation */
+.letter-salutation {
+  font-family: 'IM Fell English', serif;
+  font-size: 18px;
+  color: var(--ink);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 12px;
+}
+
+.letter-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--crimson);
+}
+
+/* Body text */
+.letter-body {
+  font-family: 'IM Fell English', serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+}
+
+/* Batch */
+.letter-batch-block {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid rgba(139,104,32,0.35);
+  border-radius: 2px;
+  background: rgba(139,104,32,0.06);
+  margin: 8px 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-batch-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 6px;
+}
+
+
+/* House block */
+.letter-house {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-left: 3px solid var(--hcolor, #c41e3a);
+  background: rgba(0,0,0,0.04);
+  border-radius: 0 2px 2px 0;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.house-emoji { font-size: 32px; }
+
+.house-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 2px;
+}
+
+.house-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 18px;
+  color: var(--hcolor, #c41e3a);
+  font-weight: 700;
+}
+
+.house-trait {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-light);
+}
+
+/* Footer */
+.letter-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-sign {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-light);
+}
+
+.letter-signatory {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.letter-signatory-title {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  opacity: 0.7;
+}
+
+.letter-seal-small {
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+/* PS */
+.letter-ps {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold-dark);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .parchment-body { padding: 32px 24px; }
+  .login-card { padding: 56px 28px 36px; }
+  .envelope-3d { width: 240px; height: 155px; }
+  .env-flap-left { border-width: 77px 0 77px 120px; }
+  .env-flap-right { border-width: 77px 120px 77px 0; }
+  .env-flap-bottom { border-width: 0 120px 77px 120px; }
+  .env-flap-top { border-width: 77px 120px 0 120px; }
+}
